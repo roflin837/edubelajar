@@ -37,7 +37,6 @@
 
         <div class="admin-card">
           <h2>Tambah Soal</h2>
-
           <!-- JENJANG -->
 
           <select id="jenjang">
@@ -154,13 +153,15 @@
 
       const opsiPG = document.getElementById("opsiPG");
 
-      tipeSoal.addEventListener("change", function () {
-        if (this.value === "pg") {
-          opsiPG.style.display = "block";
-        } else {
-          opsiPG.style.display = "none";
-        }
-      });
+      if (tipeSoal && opsiPG) {
+        tipeSoal.addEventListener("change", function () {
+          if (this.value === "pg") {
+            opsiPG.style.display = "block";
+          } else {
+            opsiPG.style.display = "none";
+          }
+        });
+      }
     </script>
 
     <script src="../js/script.js"></script>

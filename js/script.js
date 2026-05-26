@@ -355,9 +355,19 @@ function tampilQuiz() {
     return item.mapel === mapel && item.kelas === kelas;
   });
 
-  semuaSoal = semuaSoal.sort(() => {
-    return 0.5 - Math.random();
-  });
+  if (!localStorage.getItem("quizAktif")) {
+    semuaSoal = semuaSoal.sort(() => {
+      return 0.5 - Math.random();
+    });
+
+    const jumlah = parseInt(semuaSoal[0]?.jumlah) || 10;
+
+    semuaSoal = semuaSoal.slice(0, jumlah);
+
+    localStorage.setItem("quizAktif", JSON.stringify(semuaSoal));
+  }
+
+  semuaSoal = JSON.parse(localStorage.getItem("quizAktif")) || [];
 
   const jumlah = parseInt(semuaSoal[0]?.jumlah) || 10;
 
@@ -502,6 +512,8 @@ function cekJawaban() {
   semuaHasil.push(hasil);
 
   localStorage.setItem("hasilQuiz", JSON.stringify(semuaHasil));
+
+  localStorage.removeItem("quizAktif");
 
   alert(`
 Nama: ${nama}
@@ -891,3 +903,5 @@ function tampilLeaderboard() {
 
   list.innerHTML = html;
 }
+// Tambahkan baris ini di paling bawah script.js agar leaderboard langsung tampil
+tampilLeaderboard();

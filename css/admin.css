@@ -1,15 +1,13 @@
-css * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   font-family: "Poppins", sans-serif;
 }
 
 body {
   background: #f1f5f9;
   color: #0f172a;
-
   padding: 30px;
 }
 
@@ -18,8 +16,7 @@ body {
 ========================= */
 
 .admin-container {
-  max-width: 1000px;
-
+  max-width: 1100px;
   margin: auto;
 }
 
@@ -28,21 +25,16 @@ body {
 ========================= */
 
 .admin-title {
-  font-size: 50px;
-
+  font-size: 45px;
   font-weight: 800;
-
   color: #2563eb;
-
   margin-bottom: 10px;
 }
 
 .admin-subtitle {
   color: #64748b;
-
-  margin-bottom: 40px;
-
-  font-size: 17px;
+  margin-bottom: 35px;
+  font-size: 16px;
 }
 
 /* =========================
@@ -50,19 +42,12 @@ body {
 ========================= */
 
 #loginBox {
+  max-width: 500px;
+  margin: auto;
   background: white;
-
-  padding: 35px;
-
+  padding: 30px;
   border-radius: 25px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-
-  margin-bottom: 30px;
-}
-
-#loginBox h2 {
-  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* =========================
@@ -71,20 +56,19 @@ body {
 
 .admin-card {
   background: white;
-
-  padding: 35px;
-
+  padding: 30px;
   border-radius: 25px;
-
   margin-bottom: 30px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.admin-card h2 {
-  margin-bottom: 25px;
+/* =========================
+   FORM WRAPPER
+========================= */
 
-  color: #2563eb;
+.form-wrapper {
+  max-width: 700px;
+  margin: auto;
 }
 
 /* =========================
@@ -95,21 +79,13 @@ input,
 select,
 textarea {
   width: 100%;
-
   padding: 15px;
-
   border-radius: 15px;
-
   border: 2px solid #e2e8f0;
-
   margin-bottom: 18px;
-
   outline: none;
-
   font-size: 15px;
-
   background: #f8fafc;
-
   transition: 0.3s;
 }
 
@@ -117,14 +93,13 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: #2563eb;
-
   background: white;
 }
 
 textarea {
   resize: vertical;
-
-  min-height: 120px;
+  min-height: 140px;
+  line-height: 1.6;
 }
 
 /* =========================
@@ -133,29 +108,19 @@ textarea {
 
 button {
   width: 100%;
-
   border: none;
-
   padding: 15px;
-
   border-radius: 15px;
-
   background: linear-gradient(to right, #2563eb, #3b82f6);
-
   color: white;
-
   font-size: 15px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: 0.3s;
 }
 
 button:hover {
   transform: translateY(-2px);
-
   opacity: 0.95;
 }
 
@@ -163,47 +128,48 @@ button:hover {
    LIST SOAL
 ========================= */
 
-#listSoal {
+#listSoal,
+#listHasil {
   display: grid;
-
   gap: 20px;
 }
 
+/* =========================
+   CARD SOAL
+========================= */
+
+.card,
 .soal-card {
   background: #f8fafc;
-
-  border-left: 6px solid #2563eb;
-
+  border-left: 5px solid #2563eb;
   border-radius: 20px;
-
-  padding: 25px;
+  padding: 22px;
 }
 
+.card h3,
 .soal-card h3 {
   color: #2563eb;
-
   margin-bottom: 10px;
 }
 
+.card p,
 .soal-card p {
   margin-bottom: 8px;
-
   color: #475569;
-
   line-height: 1.6;
+  word-wrap: break-word;
 }
 
+.card small,
 .soal-card small {
   display: block;
-
   margin-top: 10px;
-
   font-weight: 600;
 }
 
+.card button,
 .soal-card button {
   margin-top: 20px;
-
   background: #ef4444;
 }
 
@@ -213,12 +179,9 @@ button:hover {
 
 hr {
   border: none;
-
   height: 2px;
-
   background: #e2e8f0;
-
-  margin: 30px 0;
+  margin: 35px 0;
 }
 
 /* =========================
@@ -227,15 +190,24 @@ hr {
 
 @media (max-width: 768px) {
   body {
-    padding: 20px;
+    padding: 18px;
   }
 
   .admin-title {
-    font-size: 38px;
+    font-size: 34px;
   }
 
   .admin-card,
   #loginBox {
-    padding: 25px;
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 14px;
+    padding: 13px;
   }
 }
