@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mata Pelajaran</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body onload="tampilMapel()">
+    <nav>
+      <div class="logo">📚 EduBelajar</div>
+
+      <div>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </nav>
+
+    <section class="hero-mini">
+      <h1 id="mapelTitle">Mata Pelajaran</h1>
+
+      <p>Pilih mata pelajaran yang ingin dipelajari.</p>
+    </section>
+
+    <section id="mapelContainer" class="cards"></section>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

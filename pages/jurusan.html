@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Jurusan SMK</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body onload="tampilJurusan()">
+    <nav>
+      <div class="logo">🛠 EduBelajar SMK</div>
+
+      <div>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </nav>
+
+    <section class="hero-mini">
+      <h1>Pilih Jurusan SMK</h1>
+
+      <p>Pilih jurusan sesuai minat dan skill kamu.</p>
+    </section>
+
+    <section id="jurusanContainer" class="cards"></section>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

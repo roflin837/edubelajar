@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar Modern</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+
+    <nav>
+      <div class="logo">📚 Belajar Modern</div>
+
+      <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="#jenjang">Jenjang</a>
+        <a href="#">Latihan</a>
+        <a href="#">Materi</a>
+        <a href="#">Leaderboard</a>
+        <a href="#contact">Contact</a>
+        <a href="pages/admin.html" style="color: red; font-weight: bold"
+          >[Admin]</a
+        >
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <h1>Belajar Jadi <span>Mudah & Seru</span></h1>
+
+        <p>
+          Platform belajar online modern untuk SD, SMP, SMA, dan SMK. Belajar
+          lebih interaktif, modern, dan tidak membosankan.
+        </p>
+
+        <button>Mulai Belajar</button>
+      </div>
+
+      <div>
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" />
+      </div>
+    </section>
+
+    <h1 class="section-title">Pilih Jenjang Pendidikan</h1>
+
+    <section id="jenjang" class="cards">
+      <div class="card sd">
+        <img src="https://cdn-icons-png.flaticon.com/512/2436/2436874.png" />
+        <h2>SD</h2>
+        <p>Belajar sambil bermain dengan materi seru.</p>
+        <button onclick="pilihJenjang('sd')">Belajar Seru</button>
+      </div>
+
+      <div class="card smp">
+        <img src="https://cdn-icons-png.flaticon.com/512/3212/3212608.png" />
+        <h2>SMP</h2>
+        <p>Temukan potensi dan skill akademikmu.</p>
+        <button onclick="pilihJenjang('smp')">Mulai Belajar</button>
+      </div>
+
+      <div class="card sma">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" />
+        <h2>SMA</h2>
+        <p>Persiapkan masa depan dan cita-citamu.</p>
+        <button onclick="pilihJenjang('sma')">Siapkan Masa</button>
+      </div>
+
+      <div class="card smk">
+        <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" />
+        <h2>SMK</h2>
+        <p>Kuasai skill dan dunia industri modern.</p>
+        <button onclick="pilihJenjang('smk')">Kuasai Skill</button>
+      </div>
+    </section>
+
+    <h1 class="section-title">Fitur Unggulan</h1>
+
+    <section class="features">
+      <div class="feature-box">
+        <h3>📝 Latihan Soal</h3>
+        <p>Ribuan soal interaktif semua jenjang.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>🏆 Leaderboard</h3>
+        <p>Bersaing dengan siswa lain.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>📚 Materi PDF</h3>
+        <p>Download materi belajar lengkap.</p>
+      </div>
+
+      <div class="feature-box">
+        <h3>📈 Progress Belajar</h3>
+        <p>Pantau perkembangan belajar harian.</p>
+      </div>
+    </section>
+
+    <h1 class="section-title">Statistik Platform</h1>
+
+    <section class="stats">
+      <div class="stat">
+        <h1>12K+</h1>
+        <p>Siswa Aktif</p>
+      </div>
+
+      <div class="stat">
+        <h1>5K+</h1>
+        <p>Soal</p>
+      </div>
+
+      <div class="stat">
+        <h1>300+</h1>
+        <p>Materi</p>
+      </div>
+
+      <div class="stat">
+        <h1>50+</h1>
+        <p>Mata Pelajaran</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <h3>Belajar Modern</h3>
+          <p>
+            Platform edukasi modern Indonesia untuk membantu siswa belajar lebih
+            mudah dan menyenangkan.
+          </p>
+        </div>
+
+        <div>
+          <h3>Menu</h3>
+          <a href="#">Home</a>
+          <a href="#">Latihan</a>
+          <a href="#">Materi</a>
+          <a href="#">Leaderboard</a>
+        </div>
+
+        <div id="contact">
+          <h3>Kontak</h3>
+          <p>Email: support@belajar.com</p>
+          <p>Instagram: @belajarmodern</p>
+        </div>
+      </div>
+
+      <div class="copyright">© 2026 Belajar Modern. All Rights Reserved.</div>
+    </footer>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Detail Jenjang</title>
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body onload="tampilJenjang()">
+    <!-- NAVBAR -->
+
+    <nav>
+      <div class="logo">📚 EduBelajar</div>
+
+      <div>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero-mini">
+      <h1 id="title">Pilih Kelas</h1>
+
+      <p>Pilih kelas sesuai jenjang pendidikan kamu.</p>
+    </section>
+
+    <!-- CARD -->
+
+    <section id="container" class="cards"></section>
+
+    <!-- JS -->
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="../css/admin.css" />
+  </head>
+
+  <body>
+    <div class="admin-container">
+      <!-- TITLE -->
+
+      <h1 class="admin-title">ADMIN PANEL</h1>
+
+      <p class="admin-subtitle">kelola soal quiz website belajar</p>
+
+      <!-- LOGIN -->
+
+      <div id="loginBox">
+        <h2>Login Admin</h2>
+
+        <input type="email" id="email" placeholder="email admin" />
+
+        <input type="password" id="password" placeholder="password" />
+
+        <button onclick="loginAdmin()">Login</button>
+      </div>
+
+      <!-- ADMIN PANEL -->
+
+      <div id="adminPanel" style="display: none">
+        <!-- TAMBAH SOAL -->
+
+        <div class="admin-card">
+          <h2>Tambah Soal</h2>
+
+          <!-- JENJANG -->
+
+          <select id="jenjang">
+            <option value="">Pilih Jenjang</option>
+
+            <option value="sd">SD</option>
+
+            <option value="smp">SMP</option>
+
+            <option value="sma">SMA</option>
+
+            <option value="smk">SMK</option>
+          </select>
+
+          <!-- KELAS -->
+
+          <select id="kelas">
+            <option value="">Pilih Kelas</option>
+          </select>
+
+          <!-- JURUSAN -->
+
+          <div id="jurusanBox" style="display: none">
+            <select id="jurusan">
+              <option value="">Pilih Jurusan</option>
+
+              <option value="RPL">RPL</option>
+
+              <option value="TKJ">TKJ</option>
+
+              <option value="DKV">DKV</option>
+
+              <option value="TBSM">TBSM</option>
+
+              <option value="TKRO">TKRO</option>
+            </select>
+          </div>
+
+          <!-- MAPEL -->
+
+          <select id="mapel">
+            <option value="">Pilih Mapel</option>
+          </select>
+
+          <!-- JUMLAH SOAL -->
+
+          <input type="number" id="jumlahSoal" placeholder="jumlah soal quiz" />
+
+          <!-- PERTANYAAN -->
+
+          <textarea id="pertanyaan" placeholder="masukkan soal"></textarea>
+
+          <!-- TIPE SOAL -->
+
+          <select id="tipeSoal">
+            <option value="essay">Essay</option>
+
+            <option value="pg">Pilihan Ganda</option>
+          </select>
+
+          <!-- OPSI PG -->
+
+          <div id="opsiPG" style="display: none">
+            <input type="text" id="opsiA" placeholder="Opsi A" />
+
+            <input type="text" id="opsiB" placeholder="Opsi B" />
+
+            <input type="text" id="opsiC" placeholder="Opsi C" />
+
+            <input type="text" id="opsiD" placeholder="Opsi D" />
+          </div>
+
+          <!-- MATERI -->
+
+          <h3>Materi Pembelajaran</h3>
+
+          <textarea
+            id="materi"
+            rows="8"
+            placeholder="masukkan materi pembelajaran"
+          ></textarea>
+
+          <!-- JAWABAN -->
+
+          <input type="text" id="jawaban" placeholder="jawaban benar" />
+
+          <!-- BUTTON -->
+
+          <button onclick="tambahSoal()">Simpan Soal</button>
+        </div>
+
+        <!-- DAFTAR SOAL -->
+
+        <div class="admin-card">
+          <h2>Daftar Soal</h2>
+
+          <div id="listSoal"></div>
+
+          <hr />
+
+          <h2>Hasil Quiz Murid</h2>
+
+          <div id="listHasil"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // =========================
+      // TOGGLE PILIHAN GANDA
+      // =========================
+
+      const tipeSoal = document.getElementById("tipeSoal");
+
+      const opsiPG = document.getElementById("opsiPG");
+
+      tipeSoal.addEventListener("change", function () {
+        if (this.value === "pg") {
+          opsiPG.style.display = "block";
+        } else {
+          opsiPG.style.display = "none";
+        }
+      });
+    </script>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

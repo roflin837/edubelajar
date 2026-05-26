@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Quiz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body onload="tampilQuiz()">
+    <nav>
+      <div class="logo">📝 Quiz EduBelajar</div>
+    </nav>
+
+    <section class="hero-mini">
+      <h1 id="quizTitle">Quiz</h1>
+
+      <p>Jawab soal berikut dengan benar.</p>
+    </section>
+
+    <section class="materi-box">
+      <input
+        type="text"
+        id="nama"
+        class="input-nama"
+        placeholder="Masukkan nama kamu"
+      />
+
+      <div id="quizContainer"></div>
+
+      <button type="button" onclick="cekJawaban()">selesai</button>
+    </section>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>
