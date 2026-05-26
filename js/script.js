@@ -868,3 +868,26 @@ function tampilHasilQuiz() {
 }
 
 tampilHasilQuiz();
+
+function tampilLeaderboard() {
+  const list = document.getElementById("listLeaderboard");
+  if (!list) return;
+
+  let hasil = JSON.parse(localStorage.getItem("hasilQuiz")) || [];
+
+  // Mengurutkan berdasarkan nilai tertinggi
+  hasil.sort((a, b) => b.nilai - a.nilai);
+
+  if (hasil.length === 0) {
+    list.innerHTML = "<p>Belum ada data quiz.</p>";
+    return;
+  }
+
+  let html = `<table><tr><th>Nama</th><th>Mapel</th><th>Nilai</th></tr>`;
+  hasil.forEach((item) => {
+    html += `<tr><td>${item.nama}</td><td>${item.mapel}</td><td>${item.nilai}</td></tr>`;
+  });
+  html += `</table>`;
+
+  list.innerHTML = html;
+}
