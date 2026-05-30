@@ -259,7 +259,7 @@ function tampilMapel() {
 
 function mulaiBelajar(mapel) {
   localStorage.setItem("mapel", mapel);
-
+  localStorage.removeItem("quizAktif"); // TAMBAHKAN INI
   window.location.href = "materi.html";
 }
 
@@ -273,9 +273,7 @@ function mulaiBelajar(mapel) {
 
 function tampilMateri() {
   const mapel = localStorage.getItem("mapel");
-
   const judul = document.getElementById("judulMateri");
-
   const isi = document.getElementById("isiMateri");
 
   if (!judul || !isi) return;
@@ -284,43 +282,21 @@ function tampilMateri() {
 
   let semuaSoal = JSON.parse(localStorage.getItem("soal")) || [];
 
-  // cari materi sesuai mapel
-  const dataMateri = semuaSoal.find((item) => {
-    return item.mapel === mapel;
-  });
+  // Cari data materi
+  const dataMateri = semuaSoal.find((item) => item.mapel === mapel);
 
-  // kalau belum ada materi
+  // Tampilkan Materi (Kalau kosong, kasih teks pemberitahuan)
   if (!dataMateri || !dataMateri.materi) {
-    isi.innerHTML = `
-      <p>
-        materi belum tersedia
-      </p>
-
-      <button onclick="mulaiQuiz()">
-        tetap mulai quiz
-      </button>
-    `;
-
-    return;
+    isi.innerHTML = `<p>Materi belum tersedia.</p>`;
+  } else {
+    isi.innerHTML = `<p>${dataMateri.materi}</p>`;
   }
 
-  // tampilkan materi
-  isi.innerHTML = `
-
-    <div class="materi-content">
-
-      <p>
-        ${dataMateri.materi}
-      </p>
-
-      <br>
-
-      <button onclick="mulaiQuiz()">
-        Mulai Quiz
-      </button>
-
-    </div>
-
+  // TAMBAHKAN TOMBOL INI DI LUAR IF/ELSE
+  // Biar tombol "Mulai Quiz" tetep muncul walau materi kosong
+  isi.innerHTML += `
+    <br>
+    <button onclick="mulaiQuiz()">Mulai Quiz</button>
   `;
 }
 
