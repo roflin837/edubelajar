@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Quiz</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .review-box {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+      }
+      .benar {
+        color: green;
+        font-weight: bold;
+      }
+      .salah {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-container" style="max-width: 600px; margin: auto">
+      <h1>Hasil Quiz</h1>
+      <div id="hasilDetail"></div>
+      <button onclick="window.location.href = '../index.html'">
+        Kembali ke Home
+      </button>
+    </div>
+
+    <script>
+      const hasil = JSON.parse(localStorage.getItem("hasilTerakhir"));
+      const container = document.getElementById("hasilDetail");
+
+      if (hasil) {
+        let html = `<h2>${hasil.nama} - Skor: ${hasil.nilai}</h2>`;
+        hasil.detail.forEach((item) => {
+          html += `
+                    <div class="review-box">
+                        <p><b>${item.nomor}. ${item.pertanyaan}</b></p>
+                        <p>Jawaban Kamu: ${item.jawabanUser} <span class="${item.status.includes("Benar") ? "benar" : "salah"}">${item.status}</span></p>
+                        <p style="color: blue;">Kunci Jawaban: ${item.jawabanBenar}</p>
+                    </div>
+                `;
+        });
+        container.innerHTML = html;
+      } else {
+        container.innerHTML =
+          "<p>Data tidak ditemukan. Silakan kerjakan kuis terlebih dahulu.</p>";
+      }
+    </script>
+  </body>
+</html>

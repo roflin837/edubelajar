@@ -379,81 +379,65 @@ function tampilQuiz() {
 
 function cekJawaban() {
   const nama = document.getElementById("nama").value;
-
   if (nama.trim() === "") {
-    alert("isi nama dulu");
+    alert("Isi nama dulu!");
     return;
   }
 
   let soal = JSON.parse(localStorage.getItem("quizAktif")) || [];
-
   let skor = 0;
+  let detailJawaban = []; // Array untuk simpan detail benar/salah per nomor
 
   soal.forEach((item, index) => {
     let jawabanUser = "";
 
-    // ====================
-    // PG
-    // ====================
-
+    // 1. Ambil jawaban user
     if (item.tipe === "pg") {
       const selected = document.querySelector(
         `input[name="q${index}"]:checked`,
       );
-
-      if (selected) {
-        jawabanUser = selected.value.toLowerCase().trim();
-      }
-    }
-
-    // ====================
-    // ESSAY
-    // ====================
-    else {
+      if (selected) jawabanUser = selected.value.toLowerCase().trim();
+    } else {
       const input = document.querySelector(`input[name="q${index}"]`);
-
-      if (input) {
-        jawabanUser = input.value.toLowerCase().trim();
-      }
+      if (input) jawabanUser = input.value.toLowerCase().trim();
     }
 
+    // 2. Bandingkan jawaban
     const jawabanBenar = item.jawaban.toLowerCase().trim();
+    const isBenar = jawabanUser === jawabanBenar;
+    if (isBenar) skor += 100 / soal.length;
 
-    if (jawabanUser === jawabanBenar) {
-      skor += 100 / soal.length;
-    }
+    // 3. Simpan detail untuk review
+    detailJawaban.push({
+      nomor: index + 1,
+      pertanyaan: item.pertanyaan,
+      jawabanUser: jawabanUser || "(Tidak diisi)",
+      jawabanBenar: jawabanBenar,
+      status: isBenar ? "Benar ✅" : "Salah ❌",
+    });
   });
 
-  skor = Math.round(skor);
-
+  // 4. Simpan hasil lengkap
   const sekarang = new Date();
-  const waktuStr = sekarang.toLocaleString("id-ID", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
   const hasil = {
     nama: nama,
     mapel: localStorage.getItem("mapel"),
-    nilai: skor,
-    waktu: waktuStr,
+    nilai: Math.round(skor),
+    waktu: sekarang.toLocaleString("id-ID"),
+    detail: detailJawaban, // <-- Data detail disimpan di sini
   };
 
   let semuaHasil = JSON.parse(localStorage.getItem("hasilQuiz")) || [];
-
   semuaHasil.push(hasil);
-
   localStorage.setItem("hasilQuiz", JSON.stringify(semuaHasil));
+
+  // Simpan hasil terakhir untuk ditampilkan di halaman hasil
+  localStorage.setItem("hasilTerakhir", JSON.stringify(hasil));
 
   localStorage.removeItem("quizAktif");
 
-  alert(`
-Nama: ${nama}
-Nilai: ${skor}
-  `);
+  alert("Kuis Selesai! Klik OK untuk melihat hasil.");
+  window.location.href = "hasil.html"; // Arahkan ke halaman review
 }
 
 // ===============================
@@ -792,34 +776,50 @@ tampilkanSoal();
 
 function tampilHasilQuiz() {
   const listHasil = document.getElementById("listHasil");
-
   if (!listHasil) return;
 
   let hasil = JSON.parse(localStorage.getItem("hasilQuiz")) || [];
 
   if (hasil.length === 0) {
     listHasil.innerHTML = "<p>Belum ada hasil quiz</p>";
-
     return;
   }
 
   listHasil.innerHTML = "";
 
-  hasil.forEach((item) => {
+  hasil.forEach((item, index) => {
+    // 1. Buat variabel untuk menampung detail jawaban
+    let detailHTML = "";
+
+    // Cek apakah data 'detail' ada (supaya tidak error jika data lama belum punya detail)
+    if (item.detail && Array.isArray(item.detail)) {
+      detailHTML = item.detail
+        .map(
+          (d) => `
+        <div style="font-size: 0.9em; margin-bottom: 5px; border-bottom: 1px solid #eee;">
+          <b>${d.nomor}. ${d.pertanyaan}</b><br>
+          Jawaban Murid: ${d.jawabanUser} | Status: <b>${d.status}</b>
+        </div>
+      `,
+        )
+        .join("");
+    } else {
+      detailHTML = "<p>Data detail tidak tersedia.</p>";
+    }
+
+    // 2. Tampilkan di dalam card
     listHasil.innerHTML += `
-
-      <div class="card">
-
+      <div class="card" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 8px;">
         <h3>${item.nama}</h3>
-
         <p>Mapel: ${item.mapel}</p>
-
-        <p>Nilai: ${item.nilai}</p>
-
+        <p>Nilai: <b>${item.nilai}</b></p>
         <p><small>Waktu: ${item.waktu || "Tidak ada data"}</small></p>
-
+        <div style="margin-top: 10px;">
+          <h4>Detail Jawaban:</h4>
+          ${detailHTML}
+        </div>
+        <button onclick="hapusHasil(${index})" style="margin-top: 10px; cursor: pointer;">Hapus Data</button>
       </div>
-
     `;
   });
 }
