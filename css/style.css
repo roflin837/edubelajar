@@ -515,11 +515,56 @@ th {
 
 html,
 body {
-  overflow-x: hidden;
+  width: 100%;
   max-width: 100%;
+  overflow-x: hidden;
 }
 
-.hero img {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+iframe {
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+nav,
+.hero,
+.cards,
+.features,
+.stats,
+.materi-box,
+footer {
+  width: min(90%, 1200px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.blob1,
+.blob2,
+.blob3 {
+  pointer-events: none;
+}
+
+.hero,
+.cards,
+.features,
+.stats,
+.materi-box,
+footer,
+nav {
+  overflow: hidden;
 }

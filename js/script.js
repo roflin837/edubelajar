@@ -501,10 +501,20 @@ function cekJawaban() {
 
   skor = Math.round(skor);
 
+  const sekarang = new Date();
+  const waktuStr = sekarang.toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   const hasil = {
     nama: nama,
     mapel: localStorage.getItem("mapel"),
     nilai: skor,
+    waktu: waktuStr,
   };
 
   let semuaHasil = JSON.parse(localStorage.getItem("hasilQuiz")) || [];
@@ -873,6 +883,8 @@ function tampilHasilQuiz() {
 
         <p>Nilai: ${item.nilai}</p>
 
+        <p><small>Waktu: ${item.waktu || "Tidak ada data"}</small></p>
+
       </div>
 
     `;
@@ -895,9 +907,9 @@ function tampilLeaderboard() {
     return;
   }
 
-  let html = `<table><tr><th>Nama</th><th>Mapel</th><th>Nilai</th></tr>`;
+  let html = `<table><tr><th>Nama</th><th>Mapel</th><th>Nilai</th><th>Waktu</th></tr>`;
   hasil.forEach((item) => {
-    html += `<tr><td>${item.nama}</td><td>${item.mapel}</td><td>${item.nilai}</td></tr>`;
+    html += `<tr><td>${item.nama}</td><td>${item.mapel}</td><td>${item.nilai}</td><td>${item.waktu || "-"}</td></tr>`;
   });
   html += `</table>`;
 
