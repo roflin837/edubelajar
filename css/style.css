@@ -512,3 +512,14 @@ td {
 th {
   background-color: #f8f9fa;
 }
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.hero img {
+  max-width: 100%;
+  height: auto;
+}
