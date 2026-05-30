@@ -411,11 +411,12 @@ footer a:hover {
     transition: 0.4s ease;
     z-index: 999;
     /* Hilangkan opacity/visibility lama, kita ganti pakai transform */
-    display: flex;
+    display: none;
   }
 
   .menu.active {
     right: 0; /* Tarik ke dalam layar */
+    display: flex; /* Tampilkan menu saat aktif */
   }
 }
 
