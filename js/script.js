@@ -905,3 +905,7 @@ function tampilLeaderboard() {
 }
 // Tambahkan baris ini di paling bawah script.js agar leaderboard langsung tampil
 tampilLeaderboard();
+
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("active");
+}

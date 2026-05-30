@@ -53,6 +53,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
 }
 
 .logo {
@@ -63,7 +64,16 @@ nav {
 
 .menu {
   display: flex;
-  gap: 25px;
+  gap: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 5px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.menu::-webkit-scrollbar {
+  display: none;
 }
 
 .menu a {
@@ -210,12 +220,6 @@ nav {
 }
 
 /* 2. Style saat kursor diarahkan ke card (hover) */
-.card:hover button {
-  background: #2563eb; /* Warna biru pas di-hover */
-  color: #ffffff; /* Teks jadi putih pas di-hover */
-  transform: scale(1.05); /* Sedikit membesar biar kerasa interaktif */
-}
-
 .card button:hover {
   transform: scale(1.05);
 }
@@ -348,6 +352,12 @@ footer a:hover {
   color: #94a3b8;
 }
 
+.hamburger {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -355,17 +365,59 @@ footer a:hover {
   }
 
   .hero h1 {
-    font-size: 50px;
+    font-size: 38px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 30px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .card h2 {
+    font-size: 24px;
   }
 
   nav {
-    flex-direction: column;
-    gap: 20px;
+    padding: 15px 20px;
+    position: relative;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
   }
 
   .menu {
-    flex-wrap: wrap;
-    justify-content: center;
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    width: 230px;
+    background: white;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: 0.3s;
+    z-index: 999;
+  }
+
+  .menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    display: flex;
   }
 }
 
