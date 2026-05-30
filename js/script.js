@@ -314,17 +314,13 @@ function mulaiQuiz() {
 
 function tampilQuiz() {
   const mapel = localStorage.getItem("mapel");
-
   const title = document.getElementById("quizTitle");
-
   const container = document.getElementById("quizContainer");
 
   if (!title || !container) return;
-
   title.innerHTML = "Quiz " + mapel;
 
   let semuaSoal = JSON.parse(localStorage.getItem("soal")) || [];
-
   const kelas = localStorage.getItem("kelas");
 
   semuaSoal = semuaSoal.filter((item) => {
@@ -332,24 +328,13 @@ function tampilQuiz() {
   });
 
   if (!localStorage.getItem("quizAktif")) {
-    semuaSoal = semuaSoal.sort(() => {
-      return 0.5 - Math.random();
-    });
-
+    semuaSoal = semuaSoal.sort(() => 0.5 - Math.random());
     const jumlah = parseInt(semuaSoal[0]?.jumlah) || 10;
-
     semuaSoal = semuaSoal.slice(0, jumlah);
-
     localStorage.setItem("quizAktif", JSON.stringify(semuaSoal));
   }
 
   semuaSoal = JSON.parse(localStorage.getItem("quizAktif")) || [];
-
-  const jumlah = parseInt(semuaSoal[0]?.jumlah) || 10;
-
-  semuaSoal = semuaSoal.slice(0, jumlah);
-
-  localStorage.setItem("quizAktif", JSON.stringify(semuaSoal));
 
   if (semuaSoal.length === 0) {
     container.innerHTML = "<h2>Soal belum tersedia</h2>";
@@ -357,66 +342,30 @@ function tampilQuiz() {
   }
 
   let html = "";
-
   semuaSoal.forEach((item, index) => {
-    // ====================
-    // PILIHAN GANDA
-    // ====================
+    // BARIS INI UNTUK MENAMPILKAN GAMBAR JIKA ADA
+    let gambarHTML = item.gambarSoal
+      ? `<img src="${item.gambarSoal}" style="max-width: 100%; height: auto; margin-bottom: 10px; border-radius: 8px;">`
+      : "";
 
     if (item.tipe === "pg") {
       html += `
-
         <div class="quiz-box">
-
-          <h2>
-            ${index + 1}. ${item.pertanyaan}
-          </h2>
-
-          <label>
-            <input type="radio" name="q${index}" value="${item.opsiA}">
-            ${item.opsiA}
-          </label>
-
-          <label>
-            <input type="radio" name="q${index}" value="${item.opsiB}">
-            ${item.opsiB}
-          </label>
-
-          <label>
-            <input type="radio" name="q${index}" value="${item.opsiC}">
-            ${item.opsiC}
-          </label>
-
-          <label>
-            <input type="radio" name="q${index}" value="${item.opsiD}">
-            ${item.opsiD}
-          </label>
-
+          <h2>${index + 1}. ${item.pertanyaan}</h2>
+          ${gambarHTML} 
+          <label><input type="radio" name="q${index}" value="${item.opsiA}"> ${item.opsiA}</label>
+          <label><input type="radio" name="q${index}" value="${item.opsiB}"> ${item.opsiB}</label>
+          <label><input type="radio" name="q${index}" value="${item.opsiC}"> ${item.opsiC}</label>
+          <label><input type="radio" name="q${index}" value="${item.opsiD}"> ${item.opsiD}</label>
         </div>
-
       `;
-    }
-
-    // ====================
-    // ESSAY
-    // ====================
-    else {
+    } else {
       html += `
-
         <div class="quiz-box">
-
-          <h2>
-            ${index + 1}. ${item.pertanyaan}
-          </h2>
-
-          <input
-            type="text"
-            name="q${index}"
-            placeholder="jawaban kamu"
-          >
-
+          <h2>${index + 1}. ${item.pertanyaan}</h2>
+          ${gambarHTML}
+          <input type="text" name="q${index}" placeholder="jawaban kamu">
         </div>
-
       `;
     }
   });
@@ -716,50 +665,58 @@ function tampilkanMapelAdmin(data) {
 // ===============================
 
 function tambahSoal() {
-  const tipe = document.getElementById("tipeSoal").value;
+  const fileInput = document.getElementById("gambarSoal");
+  const file = fileInput.files[0];
 
-  const data = {
-    jenjang: jenjang.value,
-    kelas: kelas.value,
-    jurusan: jurusan.value,
-    mapel: mapelSelect.value,
-    jumlah: document.getElementById("jumlahSoal").value,
+  // Kita buat fungsi pembaca file
+  const reader = new FileReader();
 
-    tipe: tipe,
+  reader.onload = function (e) {
+    const data = {
+      jenjang: jenjang.value,
+      kelas: kelas.value,
+      jurusan: jurusan.value,
+      mapel: mapelSelect.value,
+      jumlah: document.getElementById("jumlahSoal").value,
+      tipe: document.getElementById("tipeSoal").value,
+      pertanyaan: document.getElementById("pertanyaan").value,
+      opsiA: document.getElementById("opsiA").value,
+      opsiB: document.getElementById("opsiB").value,
+      opsiC: document.getElementById("opsiC").value,
+      opsiD: document.getElementById("opsiD").value,
+      jawaban: document.getElementById("jawaban").value,
+      materi: document.getElementById("materi").value,
+      gambarSoal: e.target.result, // Ini hasil Base64 dari file
+    };
 
-    pertanyaan: document.getElementById("pertanyaan").value,
+    if (!data.mapel || !data.pertanyaan || !data.jawaban) {
+      alert("Isi dulu semua data!");
+      return;
+    }
 
-    opsiA: document.getElementById("opsiA").value,
-    opsiB: document.getElementById("opsiB").value,
-    opsiC: document.getElementById("opsiC").value,
-    opsiD: document.getElementById("opsiD").value,
+    let soal = JSON.parse(localStorage.getItem("soal")) || [];
+    soal.push(data);
+    localStorage.setItem("soal", JSON.stringify(soal));
+    tampilkanSoal();
+    alert("Soal berhasil ditambah");
 
-    jawaban: document.getElementById("jawaban").value,
-
-    materi: document.getElementById("materi").value,
+    // Reset Form
+    document.getElementById("pertanyaan").value = "";
+    document.getElementById("jawaban").value = "";
+    document.getElementById("opsiA").value = "";
+    document.getElementById("opsiB").value = "";
+    document.getElementById("opsiC").value = "";
+    document.getElementById("opsiD").value = "";
+    document.getElementById("gambarSoal").value = "";
   };
 
-  if (!data.mapel || !data.pertanyaan || !data.jawaban) {
-    alert("isi dulu semua");
-    return;
+  // Cek apakah user pilih file atau tidak
+  if (file) {
+    reader.readAsDataURL(file); // Proses baca file
+  } else {
+    // Kalau nggak pilih file, tetap simpan dengan string kosong
+    reader.onload({ target: { result: "" } });
   }
-
-  let soal = JSON.parse(localStorage.getItem("soal")) || [];
-
-  soal.push(data);
-
-  localStorage.setItem("soal", JSON.stringify(soal));
-
-  tampilkanSoal();
-
-  alert("soal berhasil ditambah");
-
-  document.getElementById("pertanyaan").value = "";
-  document.getElementById("jawaban").value = "";
-  document.getElementById("opsiA").value = "";
-  document.getElementById("opsiB").value = "";
-  document.getElementById("opsiC").value = "";
-  document.getElementById("opsiD").value = "";
 }
 
 // ===============================
